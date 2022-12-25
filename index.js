@@ -10,6 +10,12 @@ const cardBackImgPath = '/JS-CardGame-HuntTheAce/images/card-back-Blue.png'
 
 const cardContainerElem = document.querySelector('.card-container')
 
+let cards = []
+
+const playGameButtonElem = document.getElementById('playGame')
+
+const collapsedGridAreaTemplate = '"a a" "a a"'
+const cardCollectionCellClass = ".card-pos-a"
 
 {/*<div class="card">
         <div class="card-inner">
@@ -22,9 +28,55 @@ const cardContainerElem = document.querySelector('.card-container')
         </div>
       </div> */}
 
+loadGame()
 
-createCards()
+function loadGame(){
+  createCards()
 
+  cards = document.querySelectorAll('.card')
+
+  playGameButtonElem.addEventListener('click', () => startGame())
+
+
+}
+
+function startGame(){
+  initializeNewGame()
+  startRound()
+}
+
+function initializeNewGame(){
+
+}
+function startRound(){
+  initializeNewRound()
+  collectCards()
+}
+function initializeNewRound(){
+
+}
+
+function collectCards(){
+  transformGridArea(collapsedGridAreaTemplate)
+  addCardsToGridAreaCell(cardCollectionCellClass)
+
+}
+
+function transformGridArea(areas)
+{
+  cardContainerElem.style.gridTemplateAreas = areas
+
+}
+
+function addCardsToGridAreaCell(cellPositionClassName)
+{
+    const cellPositionElem = document.querySelector(cellPositionClassName)
+
+    cards.forEach((card, index) =>{
+        addChildElement(cellPositionElem, card)
+    })
+
+}
 
 function createCards(){
   cardObjectDefinitions.forEach((cardItem)=>{
